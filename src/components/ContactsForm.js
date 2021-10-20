@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 //package to generate unique id
 import { v4 as uuid } from "uuid";
+import { Form, Button } from "react-bootstrap";
+import {addContacts} from "../actions/contactActions";
+import{connect} from "react-redux";
 
 function ContactsForm(props) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [location, setLocation] =useState("");
+  const [location, setLocation] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -19,7 +22,7 @@ function ContactsForm(props) {
         id: uuid(),
       };
 
-      props.handleAddContact(newContact);
+      props.addNewContact(newContact);
 
       setName("");
       setPhone("");
@@ -28,26 +31,38 @@ function ContactsForm(props) {
   }
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <Form onSubmit={(e) => handleSubmit(e)}>
+      <label>Name</label>
       <input
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
+      <br />
+      <label>Phone</label>
       <input
-        type="phone"
+        type="text"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
       />
+      <br />
+      <label>Location</label>
       <input
         type="text"
         value={location}
         onChange={(e) => setLocation(e.target.value)}
       />
 
-      <input type="submit" />
-    </form>
+      <Button>
+        {" "}
+        <input type="submit" />
+      </Button>
+    </Form>
   );
 }
 
-export default ContactsForm;
+const mapDispatchToProps = {
+  addNewContact: addContacts
+};
+
+export default connect(null, mapDispatchToProps) (ContactsForm);

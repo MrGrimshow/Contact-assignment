@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import ContactsForm from "./ContactsForm";
 import EditUserForm from "./EditContactForm";
 
 function Contact(props) {
@@ -31,7 +30,7 @@ function Contact(props) {
       {/*Modal to edit user*/}
       <Modal show={showModal} onHide={() => toggleModal()}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Edit Info</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {/*Component to edit user*/}

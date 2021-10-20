@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
 import Contact from "./Contact";
+import {connect} from "react-redux";
 
 function ContactList(props) {
   return (
-    <div>
-      {props.contacts.map((contact) => {
+    <>
+      {props.contactsData.map((contact) => {
         //renders the User component for each user in the users array
         return (
           <Contact
@@ -16,8 +15,14 @@ function ContactList(props) {
           />
         );
       })}
-    </div>
+    </>
   );
 }
 
-export default ContactList;
+const mapStateToProps = (state) => {
+  return {
+    contactsData: state.contacts
+  }
+}
+
+export default connect(mapStateToProps) (ContactList);

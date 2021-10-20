@@ -39,8 +39,8 @@ function App() {
 
   return (
     <div>
-      <UserForm handleAddContact={handleAddContact} />
-      <UserList contacts={contacts} deleteContact={deleteContact} editContact={editContact} />
+      <UserForm  />
+      <UserList  deleteContact={deleteContact} editContact={editContact} />
     </div>
   );
 }

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { connect } from "react-redux";
+import { editContact } from "../actions/contactActions";
 
-export default function EditContactForm(props) {
+function EditContactForm(props) {
   const [name, setName] = useState(props.contact.name);
   const [phone, setPhone] = useState(props.contact.phone);
   const [location, setLocation] = useState(props.contact.location);
@@ -28,7 +30,7 @@ export default function EditContactForm(props) {
     };
 
     //calls the edit User function and closes the modal
-    props.editContact(editedContact, props.contact.id);
+    props.editContact(props.contact.id, editedContact);
     props.toggleModal();
   }
 
@@ -67,3 +69,9 @@ export default function EditContactForm(props) {
     </Form>
   );
 }
+
+const mapDispatchToProps = {
+  editContact
+}
+
+export default connect(null, mapDispatchToProps)(EditContactForm);

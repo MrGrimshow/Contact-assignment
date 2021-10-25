@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import EditUserForm from "./EditContactForm";
+import { connect } from "react-redux"
+import{ deleteContact} from "../actions/contactActions"
 
 function Contact(props) {
   const contact = props.contact;
@@ -50,4 +52,8 @@ function Contact(props) {
   );
 }
 
-export default Contact;
+const mapDispatchToProps = {
+	deleteContact,
+};
+
+export default connect(null, mapDispatchToProps)(Contact);

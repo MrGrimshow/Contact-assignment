@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import UserForm from "./components/ContactsForm";
 import UserList from "./components/ContactList";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {connect} from "react-redux"
+import {getAllContacts} from "./actions/contactActions"
 
-function App() {
+function App(props) {
   const [contacts, setContacts] = useState([]);
+  useEffect(()=>{
+    props.getAllContacts();
+  },[]);
 
   function handleAddContact(contact) {
     setContacts([...contacts, contact]);
@@ -45,4 +50,8 @@ function App() {
   );
 }
 
-export default App;
+const mapDispatchToProps = {
+	getAllContacts
+};
+
+export default connect(null, mapDispatchToProps)(App);

@@ -20,6 +20,9 @@ const initialState = {
         })
         return{...state, contacts: updatedContacts}
 
+        case "SET_ALL_CONTACTS":
+          return { contacts: action.payload };
+    
         default:
           return state;
     }

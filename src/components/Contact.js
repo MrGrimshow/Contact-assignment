@@ -17,6 +17,8 @@ function Contact(props) {
     setShowModal(!showModal);
   }
 
+  console.log(contact);
+
   return (
     <div>
       <h1>{contact.name}</h1>

@@ -14,36 +14,48 @@ export const addContacts = (newContacts) => {
 }
 
 export const deleteContact = (contactId) => {
-    return {
-      type: "DELETE_CONTACT",
-      payload: contactId,
-    };
+  return (dispatch, state, { getFirestore }) => {
+		getFirestore()
+			.collection("contacts")
+			.doc(contactId)
+			.delete()
+			.then(() => {});
+	};
+    // return {
+    //   type: "DELETE_CONTACT",
+    //   payload: contactId,
+    // };
 };
 
 export const editContact = (contactId, updatedContact) => {
-    return {
-      type: "EDIT_CONTACT",
-      payload: {contactId, updatedContact},
-    };
+  return (dispatch, state, { getFirestore }) => {
+		getFirestore()
+			.collection("contact")
+			.doc(contactId)
+			.update(updatedContact)
+			.then(() => {});
+	};
+    // return {
+    //   type: "EDIT_CONTACT",
+    //   payload: {contactId, updatedContact},
+    // };
   };
 
   export const getAllContacts = () => {
     return (dispatch, state, { getFirestore }) => {
       getFirestore()
         .collection("contacts")
+        .orderBy("timestamp", "desc")
         .onSnapshot(
           (snapshot) => {
             let contacts = [];
-            console.log(snapshot);
             snapshot.forEach((doc) => {
-              contacts.push(doc.data());
+              contacts.push({ ...doc.data(), id: doc.id });
             });
             console.log(contacts);
             dispatch({ type: "SET_ALL_CONTACTS", payload: contacts });
           },
-          (error) => {
-            console.log(error);
-          }
+          (error) => {}
         );
       };
     };

@@ -3,8 +3,8 @@ import {connect} from "react-redux";
 
 function ContactList(props) {
   return (
-    <>
-      {props.contactsData.map((contact) => {
+    <div>
+      {props.contacts.map((contact) => {
         //renders the User component for each user in the users array
         return (
           <Contact
@@ -15,13 +15,14 @@ function ContactList(props) {
           />
         );
       })}
-    </>
+    </div>
   );
 }
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
-    contactsData: state.contacts
+    contacts: state.contacts.contacts
   }
 }
 
